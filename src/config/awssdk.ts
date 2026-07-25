@@ -1,4 +1,6 @@
 import { S3Client } from '@aws-sdk/client-s3';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const s3 = new S3Client({
   region: process.env.AWS_REGION as string,
@@ -8,4 +10,4 @@ export const s3 = new S3Client({
   },
 });
 
-export const S3_BUCKET = process.env.AWS_BUCKET_NAME as string;
+export const S3_BUCKET = process.env.AWS_S3_BUCKET as string;

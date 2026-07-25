@@ -4,7 +4,7 @@ export interface IInquiry extends Document {
   name: string;
   mobile: string;
   email?: string;
-  grade: string;
+  grade: string | null;
   inquiryType: string;
   message: string;
   status: 'new' | 'contacted' | 'closed';
@@ -27,17 +27,13 @@ const inquirySchema = new Schema<IInquiry>(
     email: {
       type: String,
       trim: true,
-      lowercase: true,
     },
     grade: {
       type: String,
-      required: true,
-      trim: true,
+      default: null
     },
     inquiryType: {
       type: String,
-      required: true,
-      trim: true,
     },
     message: {
       type: String,
