@@ -9,6 +9,7 @@ import rateLimit from 'express-rate-limit';
 import userRoutes from './routes/user_routes/user.routes';
 import cookieParser from 'cookie-parser';
 import { RoleBasedRequest } from './utils/types';
+import downloadRoutes from './routes/download.routes';
 
 
 
@@ -58,9 +59,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/user', userRoutes)
 app.use('/api/careers', careerRoutes);
 app.use('/api/inquiries', inquiryRoutes);
+app.use('/api/download', downloadRoutes)
 
 
-app.get("/api/health-check", (req: RoleBasedRequest, res: Response) => {
+app.get("/api/health-check", (_req: RoleBasedRequest, res: Response) => {
     res.status(200).json({
         ok: true,
         message: "Server is up and running!",
