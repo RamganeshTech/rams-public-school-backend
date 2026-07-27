@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, type Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -8,6 +8,7 @@ import { connectDB } from './config/connectDB';
 import rateLimit from 'express-rate-limit';
 import userRoutes from './routes/user_routes/user.routes';
 import cookieParser from 'cookie-parser';
+import { RoleBasedRequest } from './utils/types';
 
 
 
@@ -57,6 +58,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/user', userRoutes)
 app.use('/api/careers', careerRoutes);
 app.use('/api/inquiries', inquiryRoutes);
+
+
+app.get("/api/health-check", (req: RoleBasedRequest, res: Response) => {
+    res.status(200).json({
+        ok: true,
+        message: "Server is up and running!",
+        timestamp: new Date()
+    });
+});
 
 // Health check
 app.get('/', (_req, res) => {
