@@ -16,7 +16,7 @@ export interface IUpload {
 }
 
 
-export type IRole =  "staff" | "admin" | "owner" | null;
+export type IRole =  "principal" | "admin" | "correspondent" | "viceprincipal"| "teacher"| "accountant" | null;
 
 export interface IUser extends Document {
   email?: string;

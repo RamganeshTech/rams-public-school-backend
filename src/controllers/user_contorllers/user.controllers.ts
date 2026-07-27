@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import type { Response } from "express";
 import { RoleBasedRequest } from '../../utils/types';
 import { isValidEmail, isValidPhone } from '../../utils/basicValidation';
-import UserModel from '../../models/UserModel/user.model';
+import UserModel, { IRole } from '../../models/UserModel/user.model';
 import { uploadFileToS3 } from '../../utils/s3Upload';
 import { transporter } from '../../services/mail_services/forgotPasswordMail';
 import dotenv from 'dotenv';
@@ -657,7 +657,7 @@ export const assignRolesToUser = async (req: RoleBasedRequest, res: Response) =>
     }
 
 
-    const allowedRoles = ["correspondent", "teacher", "principal", "viceprincipal", "administrator", "parent", "accountant"]
+    const allowedRoles:IRole[] = ["principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant", ]
 
     // console.log("allowedRoles", allowedRoles)
     if (!allowedRoles.includes(role)) {

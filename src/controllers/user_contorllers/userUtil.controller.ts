@@ -8,7 +8,7 @@ export const getUsers = async (req: Request, res: Response): Promise<any> => {
         // If a Platform Admin is querying, they might pass it in query params.
         const role = req.params.role as IRole | "all";
 
-        const allowedRoles: IRole[] = ["owner", "admin", "staff"]
+        const allowedRoles: IRole[] = ["principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant" ]
 
         // 2. Build the Query Object
 

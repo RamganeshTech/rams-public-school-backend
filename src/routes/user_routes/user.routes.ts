@@ -18,38 +18,38 @@ userRoutes.post('/login', adminReadLimiter,loginUser);
 userRoutes.post('/logout',adminReadLimiter, logoutUser);
 userRoutes.get('/isauthenticated',
     adminReadLimiter,
-    multiRoleAuth("owner", "staff",  "admin"),
+    multiRoleAuth("principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant"),
     isAuthenticated);
 
 userRoutes.delete("/delete/:id",
     adminReadLimiter,
-    multiRoleAuth("owner", "admin"),
+    multiRoleAuth("principal" , "admin" , "correspondent"),
     deleteUser);
 
 userRoutes.put("/update/:id",
     adminReadLimiter,
-    multiRoleAuth("owner", "staff",  "admin"),
+    multiRoleAuth("principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant"),
     updateUser);
 
 
 userRoutes.put("/update-profile-img/:id",
     adminReadLimiter,
   parseFormData.single("file"), // Image
-    multiRoleAuth("owner", "staff",  "admin"),
+    multiRoleAuth("principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant"),
     updateProfileImg);
 
 //  new route (in role  if you send the all in the role params , then youll get all the users irrespective of role)
 userRoutes.get(
     "/:role",
     adminReadLimiter,
-    multiRoleAuth("owner", "staff",  "admin"),
+    multiRoleAuth("principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant"),
     getUsers
 );
 
 userRoutes.get(
     "/get-single/:userId",
     adminReadLimiter,
-    multiRoleAuth("owner", "staff",  "admin"),
+    multiRoleAuth("principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant"),
     getSingleUser
 );
 
@@ -57,7 +57,7 @@ userRoutes.get(
 userRoutes.put(
     "/assignrole/:userId",
     adminReadLimiter,
-    multiRoleAuth("owner", "admin", "staff"),
+    multiRoleAuth("principal" , "admin" , "correspondent" , "viceprincipal", "teacher", "accountant"),
     assignRolesToUser
 );
 
